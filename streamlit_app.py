@@ -19,8 +19,25 @@ def download_model(url):
   """Downloads a zipped model file from the specified URL using requests."""
   model_response = requests.get(url)
   model_response.raise_for_status()  # Raise error for failed downloads
-  return model_response.content
+  return model_response.content, model_response
 
+def check_model(content): 
+  try:
+    model_response = content
+    #model_response.raise_for_status()  # Raise error for failed downloads
+
+    # Extract file extension (assuming content-type header is present)
+    content_type = model_response.headers.get('Content-Type')
+    if content_type:
+      file_extension = content_type.split('/')[-1]
+    else:
+      file_extension = ""
+    print file_extension
+    return True, file_extension
+  except requests.exceptions.RequestException as e:
+    print(f"Download failed: {e}")
+    return False, ""
+    
 def extract_model(model_bytes):
   """Extracts the zipped model content into a BytesIO object representing an in-memory folder."""
   import zipfile
@@ -43,7 +60,9 @@ model_path = os.path.dirname(__file__)
 model_url = "https://www.dropbox.com/scl/fi/3ifsodhw1dbo9kw8behl3/cyberbullying_dbert.zip?rlkey=g49hb39f8sc8j334wreqlonok&st=6v4iz3wn&dl=0" 
 try:
   #model = tf.saved_model.load(model_path)
-  model_bytes = download_model(model_url)
+  model_bytes, content = download_model(model_url)
+  #check
+  check_model(content)
   # Extract the zipped model content
   model_content = extract_model(model_bytes)
 except Exception as error:
