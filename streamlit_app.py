@@ -7,6 +7,8 @@ import shutil
 import tensorflow_hub as hub
 import tensorflow_text as text
 import os
+import requests 
+from io import BytesIO
 
 st.title("Cyber Bullying detection App")
 st.write("Hi bully and the buliied")
