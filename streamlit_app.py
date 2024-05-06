@@ -11,5 +11,5 @@ st.write("Hi bully and the buliied")
 model_path = "/"
 try:
   model = tf.saved_model.load(model_path)
-except error:
+except Exception as error:
   st.write(f"error: {error}")
