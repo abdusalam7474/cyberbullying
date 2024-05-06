@@ -1,10 +1,10 @@
 import streamlit as st
-import numpy as np
-import pandas as pd
-import tensorflow as tf
-import shutil
-import tensorflow_hub as hub
-import tensorflow_text as text
+import numpy as np
+import pandas as pd
+import tensorflow as tf
+import shutil
+import tensorflow_hub as hub
+import tensorflow_text as text
 
 st.title("Cyber Bullying detection App")
 st.write("Hi bully and the buliied")
