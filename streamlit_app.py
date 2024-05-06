@@ -10,6 +10,6 @@ st.title("Cyber Bullying detection App")
 st.write("Hi bully and the buliied")
 model_path = "/"
 try:
-  model = tf.saved_model.load(model_path)
+  model = tf.saved_model.load(model_path)
 except error:
   st.write(f"error: {error}")
