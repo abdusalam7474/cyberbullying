@@ -11,6 +11,6 @@ st.title("Cyber Bullying detection App")
 st.write("Hi bully and the buliied")
 model_path = os.path.join(os.path.dirname(__file__), "/")
 try:
-  model = tf.saved_model.load(model_path)
+  model = tf.saved_model.load("saved_model.pb")
 except Exception as error:
   st.write(f"error: {error}")
