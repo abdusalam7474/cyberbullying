@@ -32,10 +32,10 @@ def check_model(content):
       file_extension = content_type.split('/')[-1]
     else:
       file_extension = ""
-    print file_extension
+    st.write((file_extension)
     return True, file_extension
   except requests.exceptions.RequestException as e:
-    print(f"Download failed: {e}")
+    st.write(f"Download failed: {e}")
     return False, ""
     
 def extract_model(model_bytes):
