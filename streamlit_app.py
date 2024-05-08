@@ -148,7 +148,7 @@ def generate_preset_inputs():
   ]
 """
 def print_my_results(inputs, results):
-  """Prints (or displays in Streamlit) analysis results for each input.
+  @Prints (or displays in Streamlit) analysis results for each input.
 
   Args:
       inputs: A list of strings representing the input text.
