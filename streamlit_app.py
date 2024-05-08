@@ -21,9 +21,14 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
 nltk.download('vader_lexicon')
+st.title("Cyberbullying Detection App")
+st.write("This application helps identify potential cyberbullying based on text analysis.")
+st.header("Understanding Bullying:")
 
-st.title("Cyber Bullying detection App")
-st.write("Hi bully and the buliied")
+st.write("**Positive statements can be bullying:**  Praising someone excessively to make them feel bad about themselves is a form of bullying.")
+st.write("**Negative statements aren't always bullying:**  Constructive criticism or pointing out a mistake isn't necessarily bullying.")
+
+
 
 # download model from Dropbox, cache it and load the model into the app 
 @st.cache(allow_output_mutation=True)
@@ -103,6 +108,44 @@ def load_bert_model(model_content):
 
 model_path = os.path.dirname(__file__)
 model_url = "https://www.dropbox.com/scl/fi/3ifsodhw1dbo9kw8behl3/cyberbullying_dbert.zip?rlkey=g49hb39f8sc8j334wreqlonok&st=6v4iz3wn&dl=0" 
+
+#__Main program starts
+
+st.header("Analyze Text")
+
+user_input = st.text_input("Enter text to analyze:")
+
+if st.button("Analyze"):
+  # Pass user_input to your cyberbullying detection model (replace with your model)
+  prediction = predict_cyberbullying(user_input)
+  results = [prediction]
+
+  print_my_results([user_input], results)
+
+def generate_preset_inputs():
+  # Define a list of pre-defined sentences (positive, negative, bullying)
+  return [
+    "You did a great job on that presentation!",  # Positive (could be bullying)
+    "I disagree with your approach, but here's why...",  # Negative (not bullying)
+    "You're such a loser, nobody likes you!",  # Bullying
+  ]
+
+if st.button("Analyze with Preset Inputs"):
+  inputs = generate_preset_inputs()
+  # Pass the list of preset inputs to your model
+  results = predict_cyberbullying(inputs)
+
+  print_my_results(inputs, results)
+def print_my_results(inputs, results):
+  """Prints (or displays in Streamlit) analysis results for each input."""
+
+  for i in range(len(inputs)):
+    st.write(f'**Input:** {inputs[i][:30]}')
+    st.write(f'**Sentiment:** {results[i]}')
+    st.write("---")
+
+
+"""
 try:
   #model = tf.saved_model.load(model_path)
   model_bytes, content = download_model(model_url)
@@ -113,3 +156,4 @@ try:
 except Exception as error:
   st.write(f"error: {error}")
   
+"""
