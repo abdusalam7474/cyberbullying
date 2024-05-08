@@ -146,17 +146,9 @@ def generate_preset_inputs():
     "I disagree with your approach, but here's why...",  # Negative (not bullying)
     "You're such a loser, nobody likes you!",  # Bullying
   ]
+  
 """
 def print_my_results(inputs, results):
-  @Prints (or displays in Streamlit) analysis results for each input.
-
-  Args:
-      inputs: A list of strings representing the input text.
-      results: A list of corresponding analysis results (e.g., sentiment labels).
-
-  Returns:
-      None
-  """
   result_for_printing = [
       f'input: {inputs[i][:30]} :Sentiment: {get_sentiment(inputs[i])} :'
       f' Original category: {cate(inputs[i], df, random_selections)} :'
