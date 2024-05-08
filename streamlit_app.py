@@ -106,28 +106,28 @@ def load_bert_model(model_content):
   #reloaded_model = tf.saved_model.load(model_file_path)
   return reloaded_model
 
-# Function to get sentiment of a text
-def get_sentiment(text):
-    compound_score = sia.polarity_scores(text)['compound']
-    return 'positive' if compound_score >= 0 else 'negative'
+# Function to get sentiment of a text
+def get_sentiment(text):
+    compound_score = sia.polarity_scores(text)['compound']
+    return 'positive' if compound_score >= 0 else 'negative'
 
-def res(arr):
-    #print(arr)
-    if arr[0] > 0.5:
-       return "Bullying"
-    else:
-       return "Not bullying"
+def res(arr):
+    #print(arr)
+    if arr[0] > 0.5:
+       return "Bullying"
+    else:
+       return "Not bullying"
 
-def cate(val, df, dic):
-    index = dic[val]
-    return df["Label"][index]
+def cate(val, df, dic):
+    index = dic[val]
+    return df["Label"][index]
 """
-def print_my_results_(inputs, results):
-  result_for_printing = \
-    [f'input: {inputs[i]:<10} :Sentiment: {get_sentiment(inputs[i])} : category: {res(results[i])}'
-                         for i in range(len(inputs))]
-  print(*result_for_printing, sep='\n')
-  print()
+def print_my_results_(inputs, results):
+  result_for_printing = \
+    [f'input: {inputs[i]:<10} :Sentiment: {get_sentiment(inputs[i])} : category: {res(results[i])}'
+                         for i in range(len(inputs))]
+  print(*result_for_printing, sep='\n')
+  print()
 """
 
 def print_my_results(inputs, results):
