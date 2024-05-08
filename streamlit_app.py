@@ -106,8 +106,72 @@ def load_bert_model(model_content):
   #reloaded_model = tf.saved_model.load(model_file_path)
   return reloaded_model
 
+# Function to get sentiment of a text
+def get_sentiment(text):
+    compound_score = sia.polarity_scores(text)['compound']
+    return 'positive' if compound_score >= 0 else 'negative'
+
+def res(arr):
+    #print(arr)
+    if arr[0] > 0.5:
+       return "Bullying"
+    else:
+       return "Not bullying"
+
+def cate(val, df, dic):
+    index = dic[val]
+    return df["Label"][index]
+
+def print_my_results_(inputs, results):
+  result_for_printing = \
+    [f'input: {inputs[i]:<10} :Sentiment: {get_sentiment(inputs[i])} : category: {res(results[i])}'
+                         for i in range(len(inputs))]
+  print(*result_for_printing, sep='\n')
+  print()
+
+def generate_preset_inputs():
+  # Define a list of pre-defined sentences (positive, negative, bullying)
+  return [
+    "You did a great job on that presentation!",  # Positive (could be bullying)
+    "I disagree with your approach, but here's why...",  # Negative (not bullying)
+    "You're such a loser, nobody likes you!",  # Bullying
+  ]
+"""
+def print_my_results(inputs, results):
+  """Prints (or displays in Streamlit) analysis results for each input.
+
+  Args:
+      inputs: A list of strings representing the input text.
+      results: A list of corresponding analysis results (e.g., sentiment labels).
+
+  Returns:
+      None
+  """
+
+  result_for_printing = [
+      f'input: {inputs[i][:30]} :Sentiment: {get_sentiment(inputs[i])} :'
+      f' Original category: {cate(inputs[i], df, random_selections)} :'
+      f' category: {res(results[i])}'
+      for i in range(len(inputs))
+  ]
+
+  # Use st.write to display the results in Streamlit
+  st.write(*result_for_printing, sep='\n')
+  st.write("")  # Add an empty line for better formatting
+"""
+
 model_path = os.path.dirname(__file__)
 model_url = "https://www.dropbox.com/scl/fi/3ifsodhw1dbo9kw8behl3/cyberbullying_dbert.zip?rlkey=g49hb39f8sc8j334wreqlonok&st=6v4iz3wn&dl=0" 
+
+def print_my_results(inputs, results):
+  """Prints (or displays in Streamlit) analysis results for each input."""
+
+  for i in range(len(inputs)):
+    st.write(f'**Input:** {inputs[i][:30]}')
+    st.write(f'**Sentiment:** {results[i]}')
+    st.write("---")
+
+
 
 #__Main program starts
 
@@ -122,28 +186,13 @@ if st.button("Analyze"):
 
   print_my_results([user_input], results)
 
-def generate_preset_inputs():
-  # Define a list of pre-defined sentences (positive, negative, bullying)
-  return [
-    "You did a great job on that presentation!",  # Positive (could be bullying)
-    "I disagree with your approach, but here's why...",  # Negative (not bullying)
-    "You're such a loser, nobody likes you!",  # Bullying
-  ]
-
 if st.button("Analyze with Preset Inputs"):
   inputs = generate_preset_inputs()
   # Pass the list of preset inputs to your model
   results = ["bully","non-bully","bullying"]
 
   print_my_results(inputs, results)
-def print_my_results(inputs, results):
-  """Prints (or displays in Streamlit) analysis results for each input."""
-
-  for i in range(len(inputs)):
-    st.write(f'**Input:** {inputs[i][:30]}')
-    st.write(f'**Sentiment:** {results[i]}')
-    st.write("---")
-
+  
 
 """
 try:
