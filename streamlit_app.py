@@ -131,7 +131,7 @@ def print_my_results_(inputs, results):
 """
 
 def print_my_results(inputs, results):
-  """Prints (or displays in Streamlit) analysis results for each input."""
+  #Prints (or displays in Streamlit) analysis results for each input.
 
   for i in range(len(inputs)):
     st.write(f'**Input:** {inputs[i][:30]}')
