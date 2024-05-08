@@ -121,13 +121,23 @@ def res(arr):
 def cate(val, df, dic):
     index = dic[val]
     return df["Label"][index]
-
+"""
 def print_my_results_(inputs, results):
   result_for_printing = \
     [f'input: {inputs[i]:<10} :Sentiment: {get_sentiment(inputs[i])} : category: {res(results[i])}'
                          for i in range(len(inputs))]
   print(*result_for_printing, sep='\n')
   print()
+"""
+
+def print_my_results(inputs, results):
+  """Prints (or displays in Streamlit) analysis results for each input."""
+
+  for i in range(len(inputs)):
+    st.write(f'**Input:** {inputs[i][:30]}')
+    st.write(f'**Sentiment:** {results[i]}')
+    st.write("---")
+
 
 def generate_preset_inputs():
   # Define a list of pre-defined sentences (positive, negative, bullying)
@@ -147,7 +157,6 @@ def print_my_results(inputs, results):
   Returns:
       None
   """
-
   result_for_printing = [
       f'input: {inputs[i][:30]} :Sentiment: {get_sentiment(inputs[i])} :'
       f' Original category: {cate(inputs[i], df, random_selections)} :'
@@ -162,14 +171,6 @@ def print_my_results(inputs, results):
 
 model_path = os.path.dirname(__file__)
 model_url = "https://www.dropbox.com/scl/fi/3ifsodhw1dbo9kw8behl3/cyberbullying_dbert.zip?rlkey=g49hb39f8sc8j334wreqlonok&st=6v4iz3wn&dl=0" 
-
-def print_my_results(inputs, results):
-  """Prints (or displays in Streamlit) analysis results for each input."""
-
-  for i in range(len(inputs)):
-    st.write(f'**Input:** {inputs[i][:30]}')
-    st.write(f'**Sentiment:** {results[i]}')
-    st.write("---")
 
 
 
