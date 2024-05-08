@@ -133,7 +133,7 @@ def generate_preset_inputs():
 if st.button("Analyze with Preset Inputs"):
   inputs = generate_preset_inputs()
   # Pass the list of preset inputs to your model
-  results = predict_cyberbullying(inputs)
+  results = ["bully","non-bully","bullying"]
 
   print_my_results(inputs, results)
 def print_my_results(inputs, results):
