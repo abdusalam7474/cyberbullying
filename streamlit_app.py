@@ -174,7 +174,7 @@ def print_my_results(inputs, results, random_selections):
     st.write(f'**Sentiment:** {get_sentiment(inputs[i])}')
     st.write(f'**Original category:** {cate(inputs[i], df, random_selections)}')
     st.write(f'**Predicted category:** {res(results[i])}')
-    st.write("---")
+    st.write("..........................")
     
 def print_my_results_(inputs, results):
       st.write(f'*Result of input analysis*')
@@ -188,8 +188,31 @@ def print_my_results_x(inputs, results):
   for i in range(len(inputs)):
     st.write(f'**Input:** {inputs[i][:30]}')
     st.write(f'**Sentiment:** {results[i]}')
-    st.write("---")
+    st.write("..........................")
     
+import pandas as pd
+
+def replace_labels(df, column_name, replace_dict):
+  """Replaces values in a DataFrame column with labels from a dictionary.
+
+  Args:
+      df (pandas.DataFrame): The DataFrame containing the column to modify.
+      column_name (str): The name of the column to modify.
+      replace_dict (dict): A dictionary mapping original values to replacement labels.
+
+  Returns:
+      pandas.DataFrame: The DataFrame with the replaced values.
+  """
+
+  # Replace values using the dictionary
+  df[column_name] = df[column_name].replace(replace_dict)
+
+  return df
+
+df = pd.read_csv("sample_data.csv")
+replace_mapping = {1.0: "Bullying", 0.0: "Non-bullying"}
+df = replace_labels(df.copy(), 'label', replace_mapping)  # Use copy to avoid modifying original df
+
 model_path = os.path.dirname(__file__)
 #model_url = "https://www.dropbox.com/scl/fi/3ifsodhw1dbo9kw8behl3/cyberbullying_dbert.zip?rlkey=g49hb39f8sc8j334wreqlonok&st=6v4iz3wn&dl=0" 
 model_url = "https://www.dropbox.com/scl/fi/zxmmulmsidprp08c50vjv/Dbert2.zip?rlkey=mq48q8nnkvrxcexdjgqq1eyie&st=e52l7zo5&dl=1"
@@ -198,7 +221,6 @@ model_bytes, content = download_model(model_url)
 #check
 #check_model(content)
 sia = SentimentIntensityAnalyzer()
-df = pd.read_csv("sample_data.csv")
 
 # Extract the zipped model content
 reloaded_model = extract_model(model_bytes)
