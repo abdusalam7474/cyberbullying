@@ -9,6 +9,7 @@ import tensorflow_text as text
 import os
 import requests 
 from io import BytesIO
+import spacy
 
 import tempfile
 import zipfile
@@ -20,6 +21,8 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
+# Load the spaCy English model 
+nlp = spacy.load("en_core_web_sm") 
 nltk.download('vader_lexicon')
 st.title("Cyberbullying Detection App")
 st.write("This application helps identify potential cyberbullying based on text analysis.")
