@@ -211,11 +211,6 @@ def print_my_results_x(inputs, results):
     st.write(f'**Sentiment:** {results[i]}')
     st.write("---")
     
-def print_my_examples__(inputs, results):
-  result_for_printing = \ [f'input: {inputs[i]:<30} : score: {results[i][0]:.6f}' for i in range(len(inputs))]
-  print(*result_for_printing, sep='\n') 
-  print()
- 
 model_path = os.path.dirname(__file__)
 #model_url = "https://www.dropbox.com/scl/fi/3ifsodhw1dbo9kw8behl3/cyberbullying_dbert.zip?rlkey=g49hb39f8sc8j334wreqlonok&st=6v4iz3wn&dl=0" 
 model_url = "https://www.dropbox.com/scl/fi/zxmmulmsidprp08c50vjv/Dbert2.zip?rlkey=mq48q8nnkvrxcexdjgqq1eyie&st=e52l7zo5&dl=1"
