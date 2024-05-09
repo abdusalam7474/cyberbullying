@@ -209,9 +209,9 @@ def replace_labels(df, column_name, replace_dict):
 
   return df
 
-df = pd.read_csv("sample_data.csv")
+dfz = pd.read_csv("sample_data.csv")
 replace_mapping = {1.0: "Bullying", 0.0: "Non-bullying"}
-df = replace_labels(df.copy(), 'label', replace_mapping)  # Use copy to avoid modifying original df
+df = replace_labels(dfz.copy(), 'Label', replace_mapping)  # Use copy to avoid modifying original df
 
 model_path = os.path.dirname(__file__)
 #model_url = "https://www.dropbox.com/scl/fi/3ifsodhw1dbo9kw8behl3/cyberbullying_dbert.zip?rlkey=g49hb39f8sc8j334wreqlonok&st=6v4iz3wn&dl=0" 
