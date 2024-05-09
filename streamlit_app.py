@@ -182,7 +182,7 @@ def generate_preset_inputs():
     random_item = df.loc[random_index, 'Text'] 
     # Add to dictionary with index as key and item as value
     random_selections[random_item] = random_index
-    return random_selections
+  return random_selections
     
 def print_my_results(inputs, results, random_selections):
   st.write(f'*Results from preset inputs (Generated from original test file)*') 
