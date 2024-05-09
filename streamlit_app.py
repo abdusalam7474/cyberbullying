@@ -232,7 +232,7 @@ user_input = st.text_input("Enter text to analyze:")
 if st.button("Analyze"):
   # Pass user_input to your cyberbullying detection model (replace with your model)
   prepro_input = clean_tweet(user_input)
-  prediction = tf.sigmoid(reloaded_model(tf.constant(prepro_input)))
+  prediction = tf.sigmoid(reloaded_model(tf.constant([prepro_input])))
   print_my_results_([user_input], prediction)
 
 if st.button("Analyze with Preset Inputs"):
