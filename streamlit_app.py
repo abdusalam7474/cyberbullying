@@ -185,9 +185,9 @@ def generate_preset_inputs():
     return random_selections
     
 def print_my_results(inputs, results, random_selections):
-  st.write("Results from preset inputs (Generated from original test file)") 
+  st.write(f'*Results from preset inputs (Generated from original test file)*') 
   for i in range(len(inputs)):
-    st.write(f'**Input:** {inputs[i][:30]}')
+    st.write(f'**Input:** {inputs[i]}')
     st.write(f'**Sentiment:** {get_sentiment(inputs[i])}')
     st.write(f'**Original category:** {cate(inputs[i], df, random_selections)}')
     st.write(f'**Predicted category:** {res(results[i])}')
@@ -242,6 +242,7 @@ if st.button("Analyze with Preset Inputs"):
   rand_inputs = generate_preset_inputs()
   inp_index = list(rand_inputs.values())
   inp_text = list(rand_inputs.keys())
+  print(inp_text)
   results = tf.sigmoid(reloaded_model(tf.constant(inp_text)))
   print_my_results(inp_text, results, rand_inputs)
  
