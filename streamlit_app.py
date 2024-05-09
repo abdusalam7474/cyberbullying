@@ -181,10 +181,21 @@ def generate_preset_inputs():
     random_selections[random_item] = random_index
     return random_selections
     
-def print_my_results(inputs, results):
+def print_my_results(inputs, results, random_selections):
   result_for_printing = [
       f'input: {inputs[i][:30]} :Sentiment: {get_sentiment(inputs[i])} :'
       f' Original category: {cate(inputs[i], df, random_selections)} :'
+      f' category: {res(results[i])}'
+      for i in range(len(inputs))
+  ]
+
+  # Use st.write to display the results in Streamlit
+  st.write(*result_for_printing, sep='\n')
+  st.write("")  # Add an empty line for better formatting
+
+def print_my_results_(inputs, results):
+  result_for_printing = [
+      f'input: {inputs[i][:30]} :Sentiment: {get_sentiment(inputs[i])} :'
       f' category: {res(results[i])}'
       for i in range(len(inputs))
   ]
@@ -204,9 +215,6 @@ model_bytes, content = download_model(model_url)
 sia = SentimentIntensityAnalyzer()
 df = pd.read_csv("sample_data.csv")
 
-examples_index = list(random_selections.values())
-examples_text = list(random_selections.keys())
-
 # Extract the zipped model content
 reloaded_model = extract_model(model_bytes)
 
@@ -222,12 +230,14 @@ if st.button("Analyze"):
   # Pass user_input to your cyberbullying detection model (replace with your model)
   prepro_input = clean_tweet(user_input)
   prediction = tf.sigmoid(reloaded_model(tf.constant(prepro_input)))
-  print_my_results([user_input], prediction)
+  print_my_results_([user_input], prediction)
 
 if st.button("Analyze with Preset Inputs"):
-  inputs = generate_preset_inputs()
-  results = tf.sigmoid(reloaded_model(tf.constant(inputs)))
-  print_my_results(inputs, results)
+  rand_inputs = generate_preset_inputs()
+  inp_index = list(rand_inputs.values())
+  inp_text = list(rand_inputs.keys())
+  results = tf.sigmoid(reloaded_model(tf.constant(inp_text)))
+  print_my_results(inp_text, results, rand_inputs)
   
 
 """
