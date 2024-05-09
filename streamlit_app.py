@@ -242,7 +242,7 @@ if st.button("Analyze with Preset Inputs"):
   rand_inputs = generate_preset_inputs()
   inp_index = list(rand_inputs.values())
   inp_text = list(rand_inputs.keys())
-  print(inp_text)
+  st.write(f'sample length: {len(inp_text)}')
   results = tf.sigmoid(reloaded_model(tf.constant(inp_text)))
   print_my_results(inp_text, results, rand_inputs)
  
