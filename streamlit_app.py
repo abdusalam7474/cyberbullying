@@ -138,15 +138,47 @@ def print_my_results(inputs, results):
     st.write(f'**Sentiment:** {results[i]}')
     st.write("---")
 
-
-def generate_preset_inputs():
-  # Define a list of pre-defined sentences (positive, negative, bullying)
-  return [
-    "You did a great job on that presentation!",  # Positive (could be bullying)
-    "I disagree with your approach, but here's why...",  # Negative (not bullying)
-    "You're such a loser, nobody likes you!",  # Bullying
-  ]
+def clean_tweet(tweet):
+    # Remove URLs
+    tweet = re.sub(r'http\S+', '', tweet)
+    
+    # Remove mentions and hashtags
+    tweet = re.sub(r'@[A-Za-z0-9_]+|#[A-Za-z0-9_]+', '', tweet)
+    
+    # Remove special characters, numbers, and punctuation
+    tweet = re.sub(r'[^A-Za-z\s]', '', tweet)
+    
+    # Remove 'RT' (Retweet) indicator
+    tweet = re.sub(r'\bRT\b', '', tweet)
+    
+    # Convert to lowercase
+    tweet = tweet.lower()
+    
+    # Remove stopwords
+    # stop_words = set(stopwords.words('english'))
+    # tweet_tokens = nltk.word_tokenize(tweet)
+    # tweet = ' '.join([word for word in tweet_tokens if word not in stop_words])
+    
+    # Lemmatization
+    doc = nlp(tweet)
+    # Lemmatize each token and join them back into a string
+    tweet = ' '.join([token.lemma_ for token in doc])
+    
+    return tweet
   
+def generate_preset_inputs():
+  # Assuming 'df' is DataFrame
+  random_selections = {}
+  # Loop to get 10 random selections with their indices
+  for _ in range(10):
+    # Get a random index
+    random_index = random.randint(0, len(df)-1)
+    # Extract the item
+    random_item = df.loc[random_index, 'Text'] 
+    # Add to dictionary with index as key and item as value
+    random_selections[random_item] = random_index
+    return random_selections
+    
 """
 def print_my_results(inputs, results):
   result_for_printing = [
@@ -169,19 +201,7 @@ model_bytes, content = download_model(model_url)
 #check
 #check_model(content)
 sia = SentimentIntensityAnalyzer()
-df = pd.read_csv("/content/sample_data.csv")
-
-# Assuming 'df' is DataFrame
-random_selections = {}
-
-# Loop to get 10 random selections with their indices
-for _ in range(10):
- # Get a random index
- random_index = random.randint(0, len(df)-1)
- # Extract the item
- random_item = df.loc[random_index, 'Text']
- # Add to dictionary with index as key and item as value
- random_selections[random_item] = random_index
+df = pd.read_csv("sample_data.csv")
 
 examples_index = list(random_selections.values())
 examples_text = list(random_selections.keys())
@@ -199,16 +219,13 @@ user_input = st.text_input("Enter text to analyze:")
 
 if st.button("Analyze"):
   # Pass user_input to your cyberbullying detection model (replace with your model)
-  prediction = predict_cyberbullying(user_input)
-  results = [prediction]
-
-  print_my_results([user_input], results)
+  prepro_input = clean_tweet(user_input)
+  prediction = tf.sigmoid(reloaded_model(tf.constant(prepro_input)))
+  print_my_results([user_input], prediction)
 
 if st.button("Analyze with Preset Inputs"):
   inputs = generate_preset_inputs()
-  # Pass the list of preset inputs to your model
-  results = ["bully","non-bully","bullying"]
-
+  results = tf.sigmoid(reloaded_model(tf.constant(inputs)))
   print_my_results(inputs, results)
   
 
