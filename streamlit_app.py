@@ -197,7 +197,7 @@ def print_my_results_(inputs, results):
       st.write(f'*Result of input analysis*')
       st.write(f'**input:** {inputs[i][:30]}') 
       st.write(f'**Sentiment:** {get_sentiment(inputs[i])}')
-      st.write(f'**category:** {res(results[i])}'
+      st.write(f'**category:** {res(results[i])}')
 
 def print_my_results_x(inputs, results):
   #Prints (or displays in Streamlit) analysis results for each input.
