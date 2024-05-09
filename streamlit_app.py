@@ -178,8 +178,8 @@ def print_my_results(inputs, results, random_selections):
     
 def print_my_results_(inputs, results):
       st.write(f'*Result of input analysis*')
-      st.write(f'**input:** {inputs[i][:30]}') 
-      st.write(f'**Sentiment:** {get_sentiment(inputs[i])}')
+      st.write(f'**input:** {inputs[0]}') 
+      st.write(f'**Sentiment:** {get_sentiment(inputs[0])}')
       st.write(f'**category:** {res(results[0])}')
 
 def print_my_results_x(inputs, results):
