@@ -205,8 +205,7 @@ def print_my_results_(inputs, results):
   st.write("")  # Add an empty line for better formatting
 
 def print_my_examples__(inputs, results):
-  result_for_printing = \ 
-                      [f'input: {inputs[i]:<30} : score: {results[i][0]:.6f}' for i in range(len(inputs))]
+  result_for_printing = [f'input: {inputs[i]:<30} : score: {results[i][0]:.6f}' for i in range(len(inputs))]
   print(*result_for_printing, sep='\n') 
   print()
  
