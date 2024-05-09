@@ -124,24 +124,7 @@ def res(arr):
 def cate(val, df, dic):
     index = dic[val]
     return df["Label"][index]
-"""
-def print_my_results_(inputs, results):
-  result_for_printing = \
-    [f'input: {inputs[i]:<10} :Sentiment: {get_sentiment(inputs[i])} : category: {res(results[i])}'
-                         for i in range(len(inputs))]
-  print(*result_for_printing, sep='\n')
-  print()
-"""
 
-"""
-def print_my_results(inputs, results):
-  #Prints (or displays in Streamlit) analysis results for each input.
-
-  for i in range(len(inputs)):
-    st.write(f'**Input:** {inputs[i][:30]}')
-    st.write(f'**Sentiment:** {results[i]}')
-    st.write("---")
-"""
 
 def clean_tweet(tweet):
     # Remove URLs
@@ -197,7 +180,7 @@ def print_my_results_(inputs, results):
       st.write(f'*Result of input analysis*')
       st.write(f'**input:** {inputs[i][:30]}') 
       st.write(f'**Sentiment:** {get_sentiment(inputs[i])}')
-      st.write(f'**category:** {res(results[i])}')
+      st.write(f'**category:** {res(results[0])}')
 
 def print_my_results_x(inputs, results):
   #Prints (or displays in Streamlit) analysis results for each input.
