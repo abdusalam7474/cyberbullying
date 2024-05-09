@@ -194,14 +194,10 @@ def print_my_results(inputs, results, random_selections):
     st.write("---")
     
 def print_my_results_(inputs, results):
-  result_for_printing = [
-      f'input: {inputs[i][:30]} : Sentiment: {get_sentiment(inputs[i])} : category: {res(results[i])}'
-      for i in range(len(inputs))
-  ]
-
-  # Use st.write to display the results in Streamlit
-  st.write(*result_for_printing, sep='\n')
-  st.write("")  # Add an empty line for better formatting
+      st.write(f'*Result of input analysis*')
+      st.write(f'**input:** {inputs[i][:30]}') 
+      st.write(f'**Sentiment:** {get_sentiment(inputs[i])}')
+      st.write(f'**category:** {res(results[i])}'
 
 def print_my_results_x(inputs, results):
   #Prints (or displays in Streamlit) analysis results for each input.
