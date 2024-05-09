@@ -186,9 +186,7 @@ def generate_preset_inputs():
     
 def print_my_results(inputs, results, random_selections):
   result_for_printing = [
-      f'input: {inputs[i][:30]} :Sentiment: {get_sentiment(inputs[i])} :'
-      f' Original category: {cate(inputs[i], df, random_selections)} :'
-      f' category: {res(results[i])}'
+      f'input: {inputs[i][:30]} :Sentiment: {get_sentiment(inputs[i])} : Original category: {cate(inputs[i], df, random_selections)} : category: {res(results[i])}'
       for i in range(len(inputs))
   ]
 
@@ -198,8 +196,7 @@ def print_my_results(inputs, results, random_selections):
 
 def print_my_results_(inputs, results):
   result_for_printing = [
-      f'input: {inputs[i][:30]} :Sentiment: {get_sentiment(inputs[i])} :'
-      f' category: {res(results[i])}'
+      f'input: {inputs[i][:30]} : Sentiment: {get_sentiment(inputs[i])} : category: {res(results[i])}'
       for i in range(len(inputs))
   ]
 
@@ -207,7 +204,11 @@ def print_my_results_(inputs, results):
   st.write(*result_for_printing, sep='\n')
   st.write("")  # Add an empty line for better formatting
 
-
+def print_my_examples__(inputs, results):
+  result_for_printing = \ [f'input: {inputs[i]:<30} : score: {results[i][0]:.6f}' for i in range(len(inputs))]
+  print(*result_for_printing, sep='\n') 
+  print()
+ 
 model_path = os.path.dirname(__file__)
 #model_url = "https://www.dropbox.com/scl/fi/3ifsodhw1dbo9kw8behl3/cyberbullying_dbert.zip?rlkey=g49hb39f8sc8j334wreqlonok&st=6v4iz3wn&dl=0" 
 model_url = "https://www.dropbox.com/scl/fi/zxmmulmsidprp08c50vjv/Dbert2.zip?rlkey=mq48q8nnkvrxcexdjgqq1eyie&st=e52l7zo5&dl=1"
@@ -241,17 +242,5 @@ if st.button("Analyze with Preset Inputs"):
   inp_text = list(rand_inputs.keys())
   results = tf.sigmoid(reloaded_model(tf.constant(inp_text)))
   print_my_results(inp_text, results, rand_inputs)
-  
-
-"""
-try:
-  #model = tf.saved_model.load(model_path)
-  model_bytes, content = download_model(model_url)
-  #check
-  check_model(content)
-  # Extract the zipped model content
-  model_content = extract_model(model_bytes)
-except Exception as error:
-  st.write(f"error: {error}")
-  
-"""
+ 
+ 
