@@ -12,7 +12,7 @@ from io import BytesIO
 
 import tempfile
 import zipfile
-
+import random
 import string
 import re
 import nltk
@@ -162,7 +162,32 @@ def print_my_results(inputs, results):
 """
 
 model_path = os.path.dirname(__file__)
-model_url = "https://www.dropbox.com/scl/fi/3ifsodhw1dbo9kw8behl3/cyberbullying_dbert.zip?rlkey=g49hb39f8sc8j334wreqlonok&st=6v4iz3wn&dl=0" 
+#model_url = "https://www.dropbox.com/scl/fi/3ifsodhw1dbo9kw8behl3/cyberbullying_dbert.zip?rlkey=g49hb39f8sc8j334wreqlonok&st=6v4iz3wn&dl=0" 
+model_url = "https://www.dropbox.com/scl/fi/zxmmulmsidprp08c50vjv/Dbert2.zip?rlkey=mq48q8nnkvrxcexdjgqq1eyie&st=e52l7zo5&dl=1"
+
+model_bytes, content = download_model(model_url)
+#check
+#check_model(content)
+sia = SentimentIntensityAnalyzer()
+df = pd.read_csv("/content/sample_data.csv")
+
+# Assuming 'df' is DataFrame
+random_selections = {}
+
+# Loop to get 10 random selections with their indices
+for _ in range(10):
+ # Get a random index
+ random_index = random.randint(0, len(df)-1)
+ # Extract the item
+ random_item = df.loc[random_index, 'Text']
+ # Add to dictionary with index as key and item as value
+ random_selections[random_item] = random_index
+
+examples_index = list(random_selections.values())
+examples_text = list(random_selections.keys())
+
+# Extract the zipped model content
+reloaded_model = extract_model(model_bytes)
 
 
 
