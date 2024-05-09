@@ -185,15 +185,14 @@ def generate_preset_inputs():
     return random_selections
     
 def print_my_results(inputs, results, random_selections):
-  result_for_printing = [
-      f'input: {inputs[i][:30]} :Sentiment: {get_sentiment(inputs[i])} : Original category: {cate(inputs[i], df, random_selections)} : category: {res(results[i])}'
-      for i in range(len(inputs))
-  ]
-
-  # Use st.write to display the results in Streamlit
-  st.write(*result_for_printing, sep='\n')
-  st.write("")  # Add an empty line for better formatting
-
+  st.write("Results from preset inputs (Generated from original test file)") 
+  for i in range(len(inputs)):
+    st.write(f'**Input:** {inputs[i][:30]}')
+    st.write(f'**Sentiment:** {get_sentiment(inputs[i])}')
+    st.write(f'**Original category:** {cate(inputs[i], df, random_selections)}')
+    st.write(f'**Predicted category:** {res(results[i])}')
+    st.write("---")
+    
 def print_my_results_(inputs, results):
   result_for_printing = [
       f'input: {inputs[i][:30]} : Sentiment: {get_sentiment(inputs[i])} : category: {res(results[i])}'
@@ -204,8 +203,16 @@ def print_my_results_(inputs, results):
   st.write(*result_for_printing, sep='\n')
   st.write("")  # Add an empty line for better formatting
 
+def print_my_results_x(inputs, results):
+  #Prints (or displays in Streamlit) analysis results for each input.
+
+  for i in range(len(inputs)):
+    st.write(f'**Input:** {inputs[i][:30]}')
+    st.write(f'**Sentiment:** {results[i]}')
+    st.write("---")
+    
 def print_my_examples__(inputs, results):
-  result_for_printing = [f'input: {inputs[i]:<30} : score: {results[i][0]:.6f}' for i in range(len(inputs))]
+  result_for_printing = \ [f'input: {inputs[i]:<30} : score: {results[i][0]:.6f}' for i in range(len(inputs))]
   print(*result_for_printing, sep='\n') 
   print()
  
