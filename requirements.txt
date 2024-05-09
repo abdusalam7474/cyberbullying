@@ -2,6 +2,4 @@ tensorflow==2.13.1
 tensorflow-text==2.13.0rc0
 nltk==3.8.1
 spacy>=3.5.0,<3.6.0
-https://github.com/explosion/spacy-models/releases/download/de_core_news_lg-3.5.0/de_core_news_lg-3.5.0.tar.gz
-https://github.com/explosion/spacy-models/releases/download/de_core_news_md-3.5.0/de_core_news_md-3.5.0.tar.gz
-https://github.com/explosion/spacy-models/releases/download/de_dep_news_trf-3.5.0/de_dep_news_trf-3.5.0.tar.gz
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.5.0/en_core_web_sm-3.5.0.tar.gz
