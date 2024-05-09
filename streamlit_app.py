@@ -130,6 +130,7 @@ def print_my_results_(inputs, results):
   print()
 """
 
+"""
 def print_my_results(inputs, results):
   """Prints (or displays in Streamlit) analysis results for each input."""
 
@@ -137,6 +138,7 @@ def print_my_results(inputs, results):
     st.write(f'**Input:** {inputs[i][:30]}')
     st.write(f'**Sentiment:** {results[i]}')
     st.write("---")
+"""
 
 def clean_tweet(tweet):
     # Remove URLs
@@ -179,7 +181,6 @@ def generate_preset_inputs():
     random_selections[random_item] = random_index
     return random_selections
     
-"""
 def print_my_results(inputs, results):
   result_for_printing = [
       f'input: {inputs[i][:30]} :Sentiment: {get_sentiment(inputs[i])} :'
@@ -191,7 +192,7 @@ def print_my_results(inputs, results):
   # Use st.write to display the results in Streamlit
   st.write(*result_for_printing, sep='\n')
   st.write("")  # Add an empty line for better formatting
-"""
+
 
 model_path = os.path.dirname(__file__)
 #model_url = "https://www.dropbox.com/scl/fi/3ifsodhw1dbo9kw8behl3/cyberbullying_dbert.zip?rlkey=g49hb39f8sc8j334wreqlonok&st=6v4iz3wn&dl=0" 
