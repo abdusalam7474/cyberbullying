@@ -1,5 +1,5 @@
 tensorflow==2.13.1
 tensorflow-text==2.13.0rc0
 nltk==3.8.1
-
+spacy
 
