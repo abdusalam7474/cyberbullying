@@ -168,7 +168,7 @@ def clean_tweet(tweet):
     doc = nlp(tweet)
     # Lemmatize each token and join them back into a string
     tweet = ' '.join([token.lemma_ for token in doc])
-    
+    print(tweet)
     return tweet
   
 def generate_preset_inputs():
